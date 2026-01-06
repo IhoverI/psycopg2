@@ -501,7 +501,7 @@ for define in parser.get('build_ext', 'define').split(','):
 sources = [os.path.join('psycopg', x) for x in sources]
 depends = [os.path.join('psycopg', x) for x in depends]
 
-ext.append(Extension("psycounvdb._psycopg", sources,
+ext.append(Extension("psycopg2._psycopg", sources,
                      define_macros=define_macros,
                      include_dirs=include_dirs,
                      depends=depends,
@@ -515,7 +515,7 @@ except Exception:
     print("failed to read readme: ignoring...")
     readme = __doc__
 
-setup(name="psycounvdb",
+setup(name="psycopg2",
       version=PSYCOPG_VERSION,
       author="Federico Di Gregorio",
       author_email="fog@initd.org",
@@ -524,13 +524,13 @@ setup(name="psycounvdb",
       url="https://psycopg.org/",
       license="LGPL with exceptions",
       platforms=["any"],
-      python_requires='>=3.8',
+      python_requires='>=3.9',
       description=readme.split("\n")[0],
       long_description="\n".join(readme.split("\n")[2:]).lstrip(),
       classifiers=[x for x in classifiers.split("\n") if x],
       data_files=data_files,
-      package_dir={'psycounvdb': 'lib'},
-      packages=['psycounvdb'],
+      package_dir={'psycopg2': 'lib'},
+      packages=['psycopg2'],
       cmdclass={'build_ext': psycopg_build_ext},
       ext_modules=ext,
       project_urls={

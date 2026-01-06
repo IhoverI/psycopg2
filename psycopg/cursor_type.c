@@ -5,7 +5,7 @@
  *
  * This file is part of psycopg.
  *
- * psycopg2 is free software: you can redistribute it and/or modify it
+ * psycounvdb is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -18,7 +18,7 @@
  * You must obey the GNU Lesser General Public License in all respects for
  * all of the code used other than OpenSSL.
  *
- * psycopg2 is distributed in the hope that it will be useful, but WITHOUT
+ * psycounvdb is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
  * License for more details.
@@ -1933,7 +1933,7 @@ cursor_setup(cursorObject *self, connectionObject *conn, const char *name)
     if (PyObject_IsInstance((PyObject*)conn,
                              (PyObject *)&connectionType) == 0) {
         PyErr_SetString(PyExc_TypeError,
-            "argument 1 must be subclass of psycopg2.extensions.connection");
+            "argument 1 must be subclass of psycounvdb.extensions.connection");
         return -1;
     } */
     Py_INCREF(conn);
@@ -2085,7 +2085,7 @@ cursor_traverse(cursorObject *self, visitproc visit, void *arg)
 
 PyTypeObject cursorType = {
     PyVarObject_HEAD_INIT(NULL, 0)
-    "psycopg2.extensions.cursor",
+    "psycounvdb.extensions.cursor",
     sizeof(cursorObject), 0,
     cursor_dealloc, /*tp_dealloc*/
     0,          /*tp_print*/

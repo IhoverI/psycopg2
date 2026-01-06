@@ -6,7 +6,7 @@
 # Copyright (C) 2016-2019 Daniele Varrazzo  <daniele.varrazzo@gmail.com>
 # Copyright (C) 2020-2021 The Psycopg Team
 #
-# psycopg2 is free software: you can redistribute it and/or modify it
+# psycounvdb is free software: you can redistribute it and/or modify it
 # under the terms of the GNU Lesser General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
@@ -19,12 +19,12 @@
 # You must obey the GNU Lesser General Public License in all respects for
 # all of the code used other than OpenSSL.
 #
-# psycopg2 is distributed in the hope that it will be useful, but WITHOUT
+# psycounvdb is distributed in the hope that it will be useful, but WITHOUT
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
 # FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
 # License for more details.
 
-from psycopg2.extensions import (
+from psycounvdb.extensions import (
     new_type, new_array_type, register_type, register_adapter, QuotedString)
 
 # The module is imported on register_ipaddress

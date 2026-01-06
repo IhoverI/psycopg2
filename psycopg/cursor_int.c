@@ -5,7 +5,7 @@
  *
  * This file is part of psycopg.
  *
- * psycopg2 is free software: you can redistribute it and/or modify it
+ * psycounvdb is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -18,7 +18,7 @@
  * You must obey the GNU Lesser General Public License in all respects for
  * all of the code used other than OpenSSL.
  *
- * psycopg2 is distributed in the hope that it will be useful, but WITHOUT
+ * psycounvdb is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
  * License for more details.
@@ -83,7 +83,7 @@ curs_reset(cursorObject *self)
 }
 
 
-/* Return 1 if `obj` is a `psycopg2.sql.Composable` instance, else 0
+/* Return 1 if `obj` is a `psycounvdb.sql.Composable` instance, else 0
  * Set an exception and return -1 in case of error.
  */
 RAISES_NEG static int
@@ -93,7 +93,7 @@ _curs_is_composible(PyObject *obj)
     PyObject *m = NULL;
     PyObject *comp = NULL;
 
-    if (!(m = PyImport_ImportModule("psycopg2.sql"))) { goto exit; }
+    if (!(m = PyImport_ImportModule("psycounvdb.sql"))) { goto exit; }
     if (!(comp = PyObject_GetAttrString(m, "Composable"))) { goto exit; }
     rv = PyObject_IsInstance(obj, comp);
 

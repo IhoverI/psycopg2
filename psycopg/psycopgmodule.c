@@ -5,7 +5,7 @@
  *
  * This file is part of psycopg.
  *
- * psycopg2 is free software: you can redistribute it and/or modify it
+ * psycounvdb is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -18,7 +18,7 @@
  * You must obey the GNU Lesser General Public License in all respects for
  * all of the code used other than OpenSSL.
  *
- * psycopg2 is distributed in the hope that it will be useful, but WITHOUT
+ * psycounvdb is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
  * License for more details.
@@ -102,7 +102,7 @@ psyco_connect(PyObject *self, PyObject *args, PyObject *keywds)
     }
 
     /* Here we are breaking the connection.__init__ interface defined
-     * by psycopg2. So, if not requiring an async conn, avoid passing
+     * by psycounvdb. So, if not requiring an async conn, avoid passing
      * the async parameter. */
     /* TODO: would it be possible to avoid an additional parameter
      * to the conn constructor? A subclass? (but it would require mixins
@@ -608,23 +608,23 @@ static struct {
     PyObject **base;
     const char *docstr;
 } exctable[] = {
-    { "psycopg2.Error", &Error, NULL, Error_doc },
-    { "psycopg2.Warning", &Warning, NULL, Warning_doc },
-    { "psycopg2.InterfaceError", &InterfaceError, &Error, InterfaceError_doc },
-    { "psycopg2.DatabaseError", &DatabaseError, &Error, DatabaseError_doc },
-    { "psycopg2.InternalError", &InternalError, &DatabaseError, InternalError_doc },
-    { "psycopg2.OperationalError", &OperationalError, &DatabaseError,
+    { "psycounvdb.Error", &Error, NULL, Error_doc },
+    { "psycounvdb.Warning", &Warning, NULL, Warning_doc },
+    { "psycounvdb.InterfaceError", &InterfaceError, &Error, InterfaceError_doc },
+    { "psycounvdb.DatabaseError", &DatabaseError, &Error, DatabaseError_doc },
+    { "psycounvdb.InternalError", &InternalError, &DatabaseError, InternalError_doc },
+    { "psycounvdb.OperationalError", &OperationalError, &DatabaseError,
         OperationalError_doc },
-    { "psycopg2.ProgrammingError", &ProgrammingError, &DatabaseError,
+    { "psycounvdb.ProgrammingError", &ProgrammingError, &DatabaseError,
         ProgrammingError_doc },
-    { "psycopg2.IntegrityError", &IntegrityError, &DatabaseError,
+    { "psycounvdb.IntegrityError", &IntegrityError, &DatabaseError,
         IntegrityError_doc },
-    { "psycopg2.DataError", &DataError, &DatabaseError, DataError_doc },
-    { "psycopg2.NotSupportedError", &NotSupportedError, &DatabaseError,
+    { "psycounvdb.DataError", &DataError, &DatabaseError, DataError_doc },
+    { "psycounvdb.NotSupportedError", &NotSupportedError, &DatabaseError,
         NotSupportedError_doc },
-    { "psycopg2.extensions.QueryCanceledError", &QueryCanceledError,
+    { "psycounvdb.extensions.QueryCanceledError", &QueryCanceledError,
       &OperationalError, QueryCanceledError_doc },
-    { "psycopg2.extensions.TransactionRollbackError",
+    { "psycounvdb.extensions.TransactionRollbackError",
       &TransactionRollbackError, &OperationalError,
       TransactionRollbackError_doc },
     {NULL}  /* Sentinel */
@@ -635,7 +635,7 @@ RAISES_NEG static int
 basic_errors_init(PyObject *module)
 {
     /* the names of the exceptions here reflect the organization of the
-       psycopg2 module and not the fact the original error objects live in
+       psycounvdb module and not the fact the original error objects live in
        _psycopg */
 
     int i;
@@ -669,7 +669,7 @@ basic_errors_init(PyObject *module)
         Py_CLEAR(dict);
     }
 
-    if (!(errmodule = PyImport_ImportModule("psycopg2.errors"))) {
+    if (!(errmodule = PyImport_ImportModule("psycounvdb.errors"))) {
         /* don't inject the exceptions into the errors module */
         PyErr_Clear();
     }
@@ -721,7 +721,7 @@ sqlstate_errors_init(PyObject *module)
 {
     int i;
     char namebuf[120];
-    char prefix[] = "psycopg2.errors.";
+    char prefix[] = "psycounvdb.errors.";
     char *suffix;
     size_t bufsize;
     PyObject *exc = NULL;
@@ -734,7 +734,7 @@ sqlstate_errors_init(PyObject *module)
 		Dprintf("sqlstate_errors_init(): already called");
         return 0;
     }
-    if (!(errmodule = PyImport_ImportModule("psycopg2.errors"))) {
+    if (!(errmodule = PyImport_ImportModule("psycounvdb.errors"))) {
         /* don't inject the exceptions into the errors module */
         PyErr_Clear();
     }
@@ -771,7 +771,7 @@ sqlstate_errors_init(PyObject *module)
             goto exit;
         }
 
-        /* Expose the exceptions to psycopg2.errors */
+        /* Expose the exceptions to psycounvdb.errors */
         if (errmodule) {
             if (0 > PyModule_AddObject(
                     errmodule, sqlstate_table[i].name, exc)) {
@@ -806,7 +806,7 @@ add_module_constants(PyObject *module)
     { return -1; }
 
     if (0 > PyModule_AddStringConstant(module,
-        "__doc__", "psycopg2 PostgreSQL driver"))
+        "__doc__", "psycounvdb PostgreSQL driver"))
     { return -1; }
 
     if (0 > PyModule_AddIntConstant(module,

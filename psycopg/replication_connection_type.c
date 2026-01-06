@@ -5,7 +5,7 @@
  *
  * This file is part of psycopg.
  *
- * psycopg2 is free software: you can redistribute it and/or modify it
+ * psycounvdb is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -18,7 +18,7 @@
  * You must obey the GNU Lesser General Public License in all respects for
  * all of the code used other than OpenSSL.
  *
- * psycopg2 is distributed in the hope that it will be useful, but WITHOUT
+ * psycounvdb is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
  * License for more details.
@@ -72,7 +72,7 @@ replicationConnection_init(replicationConnectionObject *self,
     if (!(dsnopts = PyDict_New())) { return ret; }
 
     /* all the nice stuff is located in python-level ReplicationCursor class */
-    if (!(extras = PyImport_ImportModule("psycopg2.extras"))) { goto exit; }
+    if (!(extras = PyImport_ImportModule("psycounvdb.extras"))) { goto exit; }
     if (!(cursor = PyObject_GetAttrString(extras, "ReplicationCursor"))) { goto exit; }
 
     if (replication_type == REPLICATION_PHYSICAL) {
@@ -158,7 +158,7 @@ static struct PyGetSetDef replicationConnectionObject_getsets[] = {
 
 PyTypeObject replicationConnectionType = {
     PyVarObject_HEAD_INIT(NULL, 0)
-    "psycopg2.extensions.ReplicationConnection",
+    "psycounvdb.extensions.ReplicationConnection",
     sizeof(replicationConnectionObject), 0,
     0,          /*tp_dealloc*/
     0,          /*tp_print*/

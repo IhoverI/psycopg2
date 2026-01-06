@@ -5,7 +5,7 @@
  *
  * This file is part of psycopg.
  *
- * psycopg2 is free software: you can redistribute it and/or modify it
+ * psycounvdb is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -18,7 +18,7 @@
  * You must obey the GNU Lesser General Public License in all respects for
  * all of the code used other than OpenSSL.
  *
- * psycopg2 is distributed in the hope that it will be useful, but WITHOUT
+ * psycounvdb is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
  * License for more details.
@@ -110,7 +110,7 @@ psyco_conn_cursor(connectionObject *self, PyObject *args, PyObject *kwargs)
 
     if (PyObject_IsInstance(obj, (PyObject *)&cursorType) == 0) {
         PyErr_SetString(PyExc_TypeError,
-            "cursor factory must be subclass of psycopg2.extensions.cursor");
+            "cursor factory must be subclass of psycounvdb.extensions.cursor");
         goto exit;
     }
 
@@ -849,7 +849,7 @@ psyco_get_native_connection(connectionObject *self, PyObject *dummy)
 {
     EXC_IF_CONN_CLOSED(self);
 
-    return PyCapsule_New(self->pgconn, "psycopg2.connection.native_connection", NULL);
+    return PyCapsule_New(self->pgconn, "psycounvdb.connection.native_connection", NULL);
 }
 
 
@@ -998,7 +998,7 @@ psyco_conn_lobject(connectionObject *self, PyObject *args, PyObject *keywds)
     if (obj == NULL) return NULL;
     if (PyObject_IsInstance(obj, (PyObject *)&lobjectType) == 0) {
         PyErr_SetString(PyExc_TypeError,
-            "lobject factory must be subclass of psycopg2.extensions.lobject");
+            "lobject factory must be subclass of psycounvdb.extensions.lobject");
         Py_DECREF(obj);
         return NULL;
     }
@@ -1477,7 +1477,7 @@ connection_traverse(connectionObject *self, visitproc visit, void *arg)
 
 PyTypeObject connectionType = {
     PyVarObject_HEAD_INIT(NULL, 0)
-    "psycopg2.extensions.connection",
+    "psycounvdb.extensions.connection",
     sizeof(connectionObject), 0,
     connection_dealloc, /*tp_dealloc*/
     0,          /*tp_print*/

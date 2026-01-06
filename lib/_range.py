@@ -7,7 +7,7 @@
 # Copyright (C) 2012-2019 Daniele Varrazzo  <daniele.varrazzo@gmail.com>
 # Copyright (C) 2020-2021 The Psycopg Team
 #
-# psycopg2 is free software: you can redistribute it and/or modify it
+# psycounvdb is free software: you can redistribute it and/or modify it
 # under the terms of the GNU Lesser General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
@@ -20,16 +20,16 @@
 # You must obey the GNU Lesser General Public License in all respects for
 # all of the code used other than OpenSSL.
 #
-# psycopg2 is distributed in the hope that it will be useful, but WITHOUT
+# psycounvdb is distributed in the hope that it will be useful, but WITHOUT
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
 # FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
 # License for more details.
 
 import re
 
-from psycopg2._psycopg import ProgrammingError, InterfaceError
-from psycopg2.extensions import ISQLQuote, adapt, register_adapter
-from psycopg2.extensions import new_type, new_array_type, register_type
+from psycounvdb._psycopg import ProgrammingError, InterfaceError
+from psycounvdb.extensions import ISQLQuote, adapt, register_adapter
+from psycounvdb.extensions import new_type, new_array_type, register_type
 
 
 class Range:
@@ -223,7 +223,7 @@ def register_range(pgrange, pyrange, conn_or_curs, globally=False):
     of the returned `RangeCaster` object.
 
     The function queries the database on *conn_or_curs* to inspect the
-    *pgrange* type and raises `~psycopg2.ProgrammingError` if the type is not
+    *pgrange* type and raises `~psycounvdb.ProgrammingError` if the type is not
     found.  If querying the database is not advisable, use directly the
     `RangeCaster` class and register the adapter and typecasters using the
     provided functions.
@@ -344,8 +344,8 @@ class RangeCaster:
 
         Raise `ProgrammingError` if the type is not found.
         """
-        from psycopg2.extensions import STATUS_IN_TRANSACTION
-        from psycopg2.extras import _solve_conn_curs
+        from psycounvdb.extensions import STATUS_IN_TRANSACTION
+        from psycounvdb.extras import _solve_conn_curs
         conn, curs = _solve_conn_curs(conn_or_curs)
 
         if conn.info.server_version < 90200:

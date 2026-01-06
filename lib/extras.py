@@ -1,4 +1,4 @@
-"""Miscellaneous goodies for psycopg2
+"""Miscellaneous goodies for psycounvdb
 
 This module is a generic place used to hold little helper functions
 and classes until a better place in the distribution is found.
@@ -8,7 +8,7 @@ and classes until a better place in the distribution is found.
 # Copyright (C) 2003-2019 Federico Di Gregorio  <fog@debian.org>
 # Copyright (C) 2020-2021 The Psycopg Team
 #
-# psycopg2 is free software: you can redistribute it and/or modify it
+# psycounvdb is free software: you can redistribute it and/or modify it
 # under the terms of the GNU Lesser General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
@@ -21,7 +21,7 @@ and classes until a better place in the distribution is found.
 # You must obey the GNU Lesser General Public License in all respects for
 # all of the code used other than OpenSSL.
 #
-# psycopg2 is distributed in the hope that it will be useful, but WITHOUT
+# psycounvdb is distributed in the hope that it will be useful, but WITHOUT
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
 # FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
 # License for more details.
@@ -33,14 +33,14 @@ from collections import namedtuple, OrderedDict
 
 import logging as _logging
 
-import psycopg2
-from psycopg2 import extensions as _ext
+import psycounvdb
+from psycounvdb import extensions as _ext
 from .extensions import cursor as _cursor
 from .extensions import connection as _connection
 from .extensions import adapt as _A, quote_ident
 from functools import lru_cache
 
-from psycopg2._psycopg import (                             # noqa
+from psycounvdb._psycopg import (                             # noqa
     REPLICATION_PHYSICAL, REPLICATION_LOGICAL,
     ReplicationConnection as _replicationConnection,
     ReplicationCursor as _replicationCursor,
@@ -48,18 +48,18 @@ from psycopg2._psycopg import (                             # noqa
 
 
 # expose the json adaptation stuff into the module
-from psycopg2._json import (                                # noqa
+from psycounvdb._json import (                                # noqa
     json, Json, register_json, register_default_json, register_default_jsonb)
 
 
 # Expose range-related objects
-from psycopg2._range import (                               # noqa
+from psycounvdb._range import (                               # noqa
     Range, NumericRange, DateRange, DateTimeRange, DateTimeTZRange,
     register_range, RangeAdapter, RangeCaster)
 
 
 # Expose ipaddress-related objects
-from psycopg2._ipaddress import register_ipaddress          # noqa
+from psycounvdb._ipaddress import register_ipaddress          # noqa
 
 
 class DictCursorBase(_cursor):
@@ -295,7 +295,7 @@ class NamedTupleCursor(_cursor):
     their elements can be accessed both as regular numeric items as well as
     attributes.
 
-        >>> nt_cur = conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor)
+        >>> nt_cur = conn.cursor(cursor_factory=psycounvdb.extras.NamedTupleCursor)
         >>> rec = nt_cur.fetchone()
         >>> rec
         Record(id=1, num=100, data="abc'def")
@@ -513,7 +513,7 @@ class StopReplication(Exception):
     `~ReplicationCursor.consume_stream()`.
 
     Subclass of `~exceptions.Exception`.  Intentionally *not* inherited from
-    `~psycopg2.Error` as occurrence of this exception does not indicate an
+    `~psycounvdb.Error` as occurrence of this exception does not indicate an
     error.
     """
     pass
@@ -532,7 +532,7 @@ class ReplicationCursor(_replicationCursor):
 
         if slot_type == REPLICATION_LOGICAL:
             if output_plugin is None:
-                raise psycopg2.ProgrammingError(
+                raise psycounvdb.ProgrammingError(
                     "output plugin name is required to create "
                     "logical replication slot")
 
@@ -540,14 +540,14 @@ class ReplicationCursor(_replicationCursor):
 
         elif slot_type == REPLICATION_PHYSICAL:
             if output_plugin is not None:
-                raise psycopg2.ProgrammingError(
+                raise psycounvdb.ProgrammingError(
                     "cannot specify output plugin name when creating "
                     "physical replication slot")
 
             command += "PHYSICAL"
 
         else:
-            raise psycopg2.ProgrammingError(
+            raise psycounvdb.ProgrammingError(
                 f"unrecognized replication type: {repr(slot_type)}")
 
         self.execute(command)
@@ -572,7 +572,7 @@ class ReplicationCursor(_replicationCursor):
             if slot_name:
                 command += f"SLOT {quote_ident(slot_name, self)} "
             else:
-                raise psycopg2.ProgrammingError(
+                raise psycounvdb.ProgrammingError(
                     "slot name is required for logical replication")
 
             command += "LOGICAL "
@@ -583,7 +583,7 @@ class ReplicationCursor(_replicationCursor):
             # don't add "PHYSICAL", before 9.4 it was just START_REPLICATION XXX/XXX
 
         else:
-            raise psycopg2.ProgrammingError(
+            raise psycounvdb.ProgrammingError(
                 f"unrecognized replication type: {repr(slot_type)}")
 
         if type(start_lsn) is str:
@@ -596,14 +596,14 @@ class ReplicationCursor(_replicationCursor):
 
         if timeline != 0:
             if slot_type == REPLICATION_LOGICAL:
-                raise psycopg2.ProgrammingError(
+                raise psycounvdb.ProgrammingError(
                     "cannot specify timeline for logical replication")
 
             command += f" TIMELINE {timeline}"
 
         if options:
             if slot_type == REPLICATION_PHYSICAL:
-                raise psycopg2.ProgrammingError(
+                raise psycounvdb.ProgrammingError(
                     "cannot specify output plugin options for physical replication")
 
             command += " ("
@@ -746,12 +746,12 @@ def wait_select(conn):
     """Wait until a connection or cursor has data available.
 
     The function is an example of a wait callback to be registered with
-    `~psycopg2.extensions.set_wait_callback()`. This function uses
+    `~psycounvdb.extensions.set_wait_callback()`. This function uses
     :py:func:`~select.select()` to wait for data to become available, and
     therefore is able to handle/receive SIGINT/KeyboardInterrupt.
     """
     import select
-    from psycopg2.extensions import POLL_OK, POLL_READ, POLL_WRITE
+    from psycounvdb.extensions import POLL_OK, POLL_READ, POLL_WRITE
 
     while True:
         try:
@@ -773,7 +773,7 @@ def wait_select(conn):
 def _solve_conn_curs(conn_or_curs):
     """Return the connection and a DBAPI cursor from a connection or cursor."""
     if conn_or_curs is None:
-        raise psycopg2.ProgrammingError("no connection or cursor provided")
+        raise psycounvdb.ProgrammingError("no connection or cursor provided")
 
     if hasattr(conn_or_curs, 'execute'):
         conn = conn_or_curs.connection
@@ -864,7 +864,7 @@ class HstoreAdapter:
         start = 0
         for m in self._re_hstore.finditer(s):
             if m is None or m.start() != start:
-                raise psycopg2.InterfaceError(
+                raise psycounvdb.InterfaceError(
                     f"error parsing hstore pair at char {start}")
             k = _bsdec.sub(r'\1', m.group(1))
             v = m.group(2)
@@ -875,7 +875,7 @@ class HstoreAdapter:
             start = m.end()
 
         if start < len(s):
-            raise psycopg2.InterfaceError(
+            raise psycounvdb.InterfaceError(
                 f"error parsing hstore: unparsed data after char {start}")
 
         return rv
@@ -950,12 +950,12 @@ def register_hstore(conn_or_curs, globally=False, unicode=False,
 
     The |hstore| contrib module must be already installed in the database
     (executing the ``hstore.sql`` script in your ``contrib`` directory).
-    Raise `~psycopg2.ProgrammingError` if the type is not found.
+    Raise `~psycounvdb.ProgrammingError` if the type is not found.
     """
     if oid is None:
         oid = HstoreAdapter.get_oids(conn_or_curs)
         if oid is None or not oid[0]:
-            raise psycopg2.ProgrammingError(
+            raise psycounvdb.ProgrammingError(
                 "hstore type not found in the database. "
                 "please install it from your 'contrib/hstore.sql' file")
         else:
@@ -1012,7 +1012,7 @@ class CompositeCaster:
 
         tokens = self.tokenize(s)
         if len(tokens) != len(self.atttypes):
-            raise psycopg2.DataError(
+            raise psycounvdb.DataError(
                 "expecting %d components for the type %s, %d found instead" %
                 (len(self.atttypes), self.name, len(tokens)))
 
@@ -1046,7 +1046,7 @@ class CompositeCaster:
         rv = []
         for m in self._re_tokenize.finditer(s):
             if m is None:
-                raise psycopg2.InterfaceError(f"can't parse type: {s!r}")
+                raise psycounvdb.InterfaceError(f"can't parse type: {s!r}")
             if m.group(1) is not None:
                 rv.append(None)
             elif m.group(2) is not None:
@@ -1117,7 +1117,7 @@ WHERE t.oid = %%s::regtype
     AND attnum > 0 AND NOT attisdropped
 ORDER BY attnum;
 """ % typarray, (name, ))
-            except psycopg2.ProgrammingError:
+            except psycounvdb.ProgrammingError:
                 pass
             else:
                 recs = curs.fetchall()
@@ -1133,7 +1133,7 @@ ORDER BY attnum;
             conn.rollback()
 
         if not recs:
-            raise psycopg2.ProgrammingError(
+            raise psycounvdb.ProgrammingError(
                 f"PostgreSQL type '{name}' not found")
 
         type_oid = recs[0][0]
@@ -1276,7 +1276,7 @@ def execute_values(cur, sql, argslist, template=None, page_size=100, fetch=False
         [(1, 20, 3), (4, 50, 6), (7, 8, 9)])
 
     '''
-    from psycopg2.sql import Composable
+    from psycounvdb.sql import Composable
     if isinstance(sql, Composable):
         sql = sql.as_string(cur)
 

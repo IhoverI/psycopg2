@@ -1,4 +1,4 @@
-"""Connection pooling for psycopg2
+"""Connection pooling for psycounvdb
 
 This module implements thread-safe (and not) connection pools.
 """
@@ -7,7 +7,7 @@ This module implements thread-safe (and not) connection pools.
 # Copyright (C) 2003-2019 Federico Di Gregorio  <fog@debian.org>
 # Copyright (C) 2020-2021 The Psycopg Team
 #
-# psycopg2 is free software: you can redistribute it and/or modify it
+# psycounvdb is free software: you can redistribute it and/or modify it
 # under the terms of the GNU Lesser General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
@@ -20,16 +20,16 @@ This module implements thread-safe (and not) connection pools.
 # You must obey the GNU Lesser General Public License in all respects for
 # all of the code used other than OpenSSL.
 #
-# psycopg2 is distributed in the hope that it will be useful, but WITHOUT
+# psycounvdb is distributed in the hope that it will be useful, but WITHOUT
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
 # FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
 # License for more details.
 
-import psycopg2
-from psycopg2 import extensions as _ext
+import psycounvdb
+from psycounvdb import extensions as _ext
 
 
-class PoolError(psycopg2.Error):
+class PoolError(psycounvdb.Error):
     pass
 
 
@@ -60,7 +60,7 @@ class AbstractConnectionPool:
 
     def _connect(self, key=None):
         """Create a new connection and assign it to 'key' if not None."""
-        conn = psycopg2.connect(*self._args, **self._kwargs)
+        conn = psycounvdb.connect(*self._args, **self._kwargs)
         if key is not None:
             self._used[key] = conn
             self._rused[id(conn)] = key

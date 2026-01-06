@@ -15,7 +15,7 @@ This module holds all the extensions to the DBAPI-2.0 provided by psycopg.
 # Copyright (C) 2003-2019 Federico Di Gregorio  <fog@debian.org>
 # Copyright (C) 2020-2021 The Psycopg Team
 #
-# psycopg2 is free software: you can redistribute it and/or modify it
+# psycounvdb is free software: you can redistribute it and/or modify it
 # under the terms of the GNU Lesser General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
@@ -28,26 +28,26 @@ This module holds all the extensions to the DBAPI-2.0 provided by psycopg.
 # You must obey the GNU Lesser General Public License in all respects for
 # all of the code used other than OpenSSL.
 #
-# psycopg2 is distributed in the hope that it will be useful, but WITHOUT
+# psycounvdb is distributed in the hope that it will be useful, but WITHOUT
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
 # FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
 # License for more details.
 
 import re as _re
 
-from psycopg2._psycopg import (                             # noqa
+from psycounvdb._psycopg import (                             # noqa
     BINARYARRAY, BOOLEAN, BOOLEANARRAY, BYTES, BYTESARRAY, DATE, DATEARRAY,
     DATETIMEARRAY, DECIMAL, DECIMALARRAY, FLOAT, FLOATARRAY, INTEGER,
     INTEGERARRAY, INTERVAL, INTERVALARRAY, LONGINTEGER, LONGINTEGERARRAY,
     ROWIDARRAY, STRINGARRAY, TIME, TIMEARRAY, UNICODE, UNICODEARRAY,
     AsIs, Binary, Boolean, Float, Int, QuotedString, )
 
-from psycopg2._psycopg import (                         # noqa
+from psycounvdb._psycopg import (                         # noqa
     PYDATE, PYDATETIME, PYDATETIMETZ, PYINTERVAL, PYTIME, PYDATEARRAY,
     PYDATETIMEARRAY, PYDATETIMETZARRAY, PYINTERVALARRAY, PYTIMEARRAY,
     DateFromPy, TimeFromPy, TimestampFromPy, IntervalFromPy, )
 
-from psycopg2._psycopg import (                             # noqa
+from psycounvdb._psycopg import (                             # noqa
     adapt, adapters, encodings, connection, cursor,
     lobject, Xid, libpq_version, parse_dsn, quote_ident,
     string_types, binary_types, new_type, new_array_type, register_type,
@@ -186,7 +186,7 @@ def _param_escape(s,
 
 
 # Create default json typecasters for PostgreSQL 9.2 oids
-from psycopg2._json import register_default_json, register_default_jsonb    # noqa
+from psycounvdb._json import register_default_json, register_default_jsonb    # noqa
 
 try:
     JSON, JSONARRAY = register_default_json()
@@ -198,7 +198,7 @@ del register_default_json, register_default_jsonb
 
 
 # Create default Range typecasters
-from psycopg2. _range import Range                              # noqa
+from psycounvdb. _range import Range                              # noqa
 del Range
 
 

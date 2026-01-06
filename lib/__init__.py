@@ -21,7 +21,7 @@ Homepage: https://psycopg.org/
 # Copyright (C) 2003-2019 Federico Di Gregorio  <fog@debian.org>
 # Copyright (C) 2020-2021 The Psycopg Team
 #
-# psycopg2 is free software: you can redistribute it and/or modify it
+# psycounvdb is free software: you can redistribute it and/or modify it
 # under the terms of the GNU Lesser General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
@@ -34,7 +34,7 @@ Homepage: https://psycopg.org/
 # You must obey the GNU Lesser General Public License in all respects for
 # all of the code used other than OpenSSL.
 #
-# psycopg2 is distributed in the hope that it will be useful, but WITHOUT
+# psycounvdb is distributed in the hope that it will be useful, but WITHOUT
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
 # FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
 # License for more details.
@@ -48,7 +48,7 @@ Homepage: https://psycopg.org/
 
 # Import the DBAPI-2.0 stuff into top-level module.
 
-from psycopg2._psycopg import (                     # noqa
+from psycounvdb._psycopg import (                     # noqa
     BINARY, NUMBER, STRING, DATETIME, ROWID,
 
     Binary, Date, Time, Timestamp,
@@ -64,7 +64,7 @@ from psycopg2._psycopg import (                     # noqa
 
 # Register default adapters.
 
-from psycopg2 import extensions as _ext
+from psycounvdb import extensions as _ext
 _ext.register_adapter(tuple, _ext.SQL_IN)
 _ext.register_adapter(type(None), _ext.NoneAdapter)
 
@@ -72,7 +72,7 @@ _ext.register_adapter(type(None), _ext.NoneAdapter)
 # This way a new class is registered for each sub-interpreter.
 # See ticket #52
 from decimal import Decimal                         # noqa
-from psycopg2._psycopg import Decimal as Adapter    # noqa
+from psycounvdb._psycopg import Decimal as Adapter    # noqa
 _ext.register_adapter(Decimal, Adapter)
 del Decimal, Adapter
 
@@ -83,11 +83,11 @@ def connect(dsn=None, connection_factory=None, cursor_factory=None, **kwargs):
 
     The connection parameters can be specified as a string:
 
-        conn = psycopg2.connect("dbname=test user=postgres password=secret")
+        conn = psycounvdb.connect("dbname=test user=postgres password=secret")
 
     or using a set of keyword arguments:
 
-        conn = psycopg2.connect(database="test", user="postgres", password="secret")
+        conn = psycounvdb.connect(database="test", user="postgres", password="secret")
 
     Or as a mix of both. The basic connection parameters are:
 

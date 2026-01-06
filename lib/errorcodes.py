@@ -2,12 +2,12 @@
 
 This module contains symbolic names for all PostgreSQL error codes.
 """
-# psycopg2/errorcodes.py - PostgreSQL error codes
+# psycounvdb/errorcodes.py - PostgreSQL error codes
 #
 # Copyright (C) 2006-2019 Johan Dahlin  <jdahlin@async.com.br>
 # Copyright (C) 2020-2021 The Psycopg Team
 #
-# psycopg2 is free software: you can redistribute it and/or modify it
+# psycounvdb is free software: you can redistribute it and/or modify it
 # under the terms of the GNU Lesser General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
@@ -20,7 +20,7 @@ This module contains symbolic names for all PostgreSQL error codes.
 # You must obey the GNU Lesser General Public License in all respects for
 # all of the code used other than OpenSSL.
 #
-# psycopg2 is distributed in the hope that it will be useful, but WITHOUT
+# psycounvdb is distributed in the hope that it will be useful, but WITHOUT
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
 # FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
 # License for more details.

@@ -5,7 +5,7 @@
  *
  * This file is part of psycopg.
  *
- * psycopg2 is free software: you can redistribute it and/or modify it
+ * psycounvdb is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -18,7 +18,7 @@
  * You must obey the GNU Lesser General Public License in all respects for
  * all of the code used other than OpenSSL.
  *
- * psycopg2 is distributed in the hope that it will be useful, but WITHOUT
+ * psycounvdb is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
  * License for more details.
@@ -230,7 +230,7 @@ static const char transaction_status_doc[] =
 "The current in-transaction status of the connection.\n"
 "\n"
 "Symbolic constants for the values are defined in the module\n"
-"`psycopg2.extensions`: see :ref:`transaction-status-constants` for the\n"
+"`psycounvdb.extensions`: see :ref:`transaction-status-constants` for the\n"
 "available values.\n"
 "\n"
 ":type: `!int`\n"
@@ -417,7 +417,7 @@ static const char ssl_in_use_doc[] =
 "`!True` if the connection uses SSL, `!False` if not.\n"
 "\n"
 "Only available if psycopg was built with libpq >= 9.5; raise\n"
-"`~psycopg2.NotSupportedError` otherwise.\n"
+"`~psycounvdb.NotSupportedError` otherwise.\n"
 "\n"
 ":type: `!bool`\n"
 "\n"
@@ -449,7 +449,7 @@ static const char ssl_attribute_doc[] =
 ":rtype: `!str`\n"
 "\n"
 "Only available if psycopg was built with libpq >= 9.5; raise\n"
-"`~psycopg2.NotSupportedError` otherwise.\n"
+"`~psycounvdb.NotSupportedError` otherwise.\n"
 "\n"
 "Valid names are available in `ssl_attribute_names`.\n"
 "\n"
@@ -493,7 +493,7 @@ static const char ssl_attribute_names_doc[] =
 ":type: `!list` of `!str`\n"
 "\n"
 "Only available if psycopg was built with libpq >= 9.5; raise\n"
-"`~psycopg2.NotSupportedError` otherwise.\n"
+"`~psycounvdb.NotSupportedError` otherwise.\n"
 "\n"
 ".. seealso:: libpq docs for `PQsslAttributeNames()`__ for details.\n"
 ".. __: https://www.postgresql.org/docs/current/static/libpq-status.html"
@@ -588,7 +588,7 @@ conninfo_init(connInfoObject *self, PyObject *args, PyObject *kwds)
 
     if (!PyObject_TypeCheck(conn, &connectionType)) {
         PyErr_SetString(PyExc_TypeError,
-            "The argument must be a psycopg2 connection");
+            "The argument must be a psycounvdb connection");
         return -1;
     }
 
@@ -609,7 +609,7 @@ conninfo_dealloc(connInfoObject* self)
 
 PyTypeObject connInfoType = {
     PyVarObject_HEAD_INIT(NULL, 0)
-    "psycopg2.extensions.ConnectionInfo",
+    "psycounvdb.extensions.ConnectionInfo",
     sizeof(connInfoObject), 0,
     (destructor)conninfo_dealloc, /*tp_dealloc*/
     0,          /*tp_print*/
